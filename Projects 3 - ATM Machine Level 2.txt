@@ -1,0 +1,75 @@
+/*Name: Josiah Grayson
+  Class: Advanced Programming Concepts Fall 2022
+  Professor: Dr. Osei
+  Assignment: 
+  This program
+*/
+import java.util.Scanner;
+
+public class lvl2PJ3 {
+	static int balance = 100;
+	int accounts [] = new int [] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,};
+	public static void main(String[] args) {
+		CopyofMain starter = new CopyofMain();
+		starter.MainCopy();
+	}
+}
+//This class was created to use recursion
+class CopyofMain {	
+	public static void MainCopy () {
+		ATM caller =  new ATM();
+		lvl2PJ3.balance = 100;
+		int numAcc = 0;
+//Program begins, account number will be requested until correct input is received.
+		System.out.println("Enter your account number: ");
+		Scanner input = new Scanner(System.in);
+		numAcc = input.nextInt();
+		 if (numAcc < 10 && numAcc > -1) {
+		caller.Menu();	
+		 }
+		else { 
+			System.out.println('\n' + "Incorrect input Please try again" + '\n');
+			MainCopy();	
+			}
+	}
+}
+//MainMenu Class will initialize variables
+class ATM extends CopyofMain{
+Scanner choice = new Scanner(System.in);
+		int userPick;
+		int withdrawal;
+		int deposit;
+/* Menu function will create a loop using switch statements in which it will call itself at the end of
+	each execution of a case. Case 4 will end in calling the Main copy class restarting the program. */
+	public void Menu() {
+		System.out.println ("Main Menu " + '\n' + "1: Check balance" +  '\n' + "2: Withdraw" 
+				+ '\n' + "3: Deposit" + '\n' + "4: Exit");
+		System.out.println ("Enter a choice: ");
+	userPick = choice.nextInt();
+	 switch (userPick) {
+	 case 1: System.out.println("The balance is: $" + lvl2PJ3.balance  );
+			Menu();
+			 break;
+	 case 2: System.out.println("Withdraw selected" + '\n' +"Enter amount to withdraw: $");
+	 withdrawal = choice.nextInt();
+	 if(lvl2PJ3.balance > 0) {
+	 lvl2PJ3.balance = lvl2PJ3.balance - withdrawal;
+	 }
+	 else { System.out.println('\n' + "INSUFFICIENT FUNDS!" + '\n');
+	 }
+	 Menu();
+	 		break;
+	 case 3: System.out.println("Deposit selected" + '\n' +"Enter amount to deposit: $");
+	 deposit = choice.nextInt();
+	 lvl2PJ3.balance = lvl2PJ3.balance + deposit;
+	 Menu();
+	 break;
+	 		
+	 case 4: System.out.println("Exit Selected");
+				 MainCopy();	
+			break;
+	default:	System.out.println('\n' + "Invalid input!" + '\n');
+		Menu();
+	 }
+	}
+}
